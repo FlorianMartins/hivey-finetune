@@ -1,5 +1,5 @@
 # Training and conversion. torch for CUDA 12.4: pip install -r requirements.txt --extra-index-url https://download.pytorch.org/whl/cu124
-torch==2.6.0
+torch==2.13.0
 transformers==5.22.2
 peft==0.21.2
 accelerate==1.15.0
