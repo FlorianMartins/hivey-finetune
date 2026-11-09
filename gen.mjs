@@ -6,7 +6,9 @@
 import { mkdirSync, writeFileSync } from "node:fs";
 import { dirname } from "node:path";
 import { FORBIDDEN, rng } from "./families.mjs";
-import { FAMILIES2 as FAMILIES } from "./families2.mjs";
+import { FAMILIES2 } from "./families2.mjs";
+import { UNIT_FAMILIES } from "./families4.mjs";
+const FAMILIES = process.env.FAMILIES === "units" ? UNIT_FAMILIES : FAMILIES2;
 
 const arg = (name, fallback) => {
   const i = process.argv.indexOf(`--${name}`);

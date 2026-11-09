@@ -5,5 +5,5 @@ SRC=/root/projects/hivey-browser/.claude/worktrees/ui-aura-security/third_party/
 sha256sum -c frozen.sha256 2>&1 | grep -E "heldout" | cut -c1-40
 rm -rf sidebar/src sidebar/bench sidebar/scripts
 cp -r "$SRC/src" "$SRC/bench" "$SRC/scripts" sidebar/
-sha256sum heldout.mjs heldout2.mjs sidebar/bench/browser.mjs sidebar/bench/checks.mjs > frozen.sha256
+sha256sum heldout.mjs heldout2.mjs heldout3.mjs heldout-units.mjs heldout-units2.mjs sidebar/bench/browser.mjs sidebar/bench/checks.mjs > frozen.sha256
 cut -c1-12,65- frozen.sha256

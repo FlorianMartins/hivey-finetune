@@ -29,6 +29,20 @@ the scores above count them right (`rescore3.py`; the test file itself was not c
   (2-bit: 27 to 30/30). On a CPU the MoE writes as fast as the 4B (3B active parameters).
 - On a CPU the time goes into writing (11-13 tokens/s), not reading: the prompt cache already works.
 
+## Not solved: what each price counts for
+
+Totals where the unit decides (« 7 € par location » counted once, not every day): on the 8 tasks of
+`heldout-units.mjs`, the agent 4B gets 2 to 4 right, the MoE 6 or 7, the 27B 7 or 8. Tried, measured, not shipped:
+
+| Attempt | Units (4B) | 30-task bench (4B) |
+|---|---|---|
+| Training on generated tariffs (`families4.mjs`, `ft7.sh`) | 3, 4, 6 | 23, 25, 22 (from 26, 24, 27) |
+| The browser counts from the unit, the model gives quantities (`price_total`, sidebar branch `price-total`) | 4, 4, 5 | — |
+| Same, and tariff sums sent there from `calculate` | 3, 3, 3 | 24, 24, 24 |
+
+The counting is right when the quantities are; giving the right quantities is what these models miss.
+`heldout-units2.mjs` stays closed for the attempt that works.
+
 ## Layout
 
 | | |
