@@ -39,9 +39,15 @@ Totals where the unit decides (« 7 € par location » counted once, not every 
 | Training on generated tariffs (`families4.mjs`, `ft7.sh`) | 3, 4, 6 | 23, 25, 22 (from 26, 24, 27) |
 | The browser counts from the unit, the model gives quantities (`price_total`, sidebar branch `price-total`) | 4, 4, 5 | — |
 | Same, and tariff sums sent there from `calculate` | 3, 3, 3 | 24, 24, 24 |
+| Training on the browser's format, exact scripted examples (`ft8.sh`) | 2, 3, 4 | 22, 23, 24 |
 
-The counting is right when the quantities are; giving the right quantities is what these models miss.
-`heldout-units2.mjs` stays closed for the attempt that works.
+`heldout-units2.mjs`, opened once for the last attempt: ft4 4, 6, 4; ft8 4, 6, 7. A point gained on units,
+three lost on the bench: not shipped. The counting is right when the quantities are; giving the right
+quantities is what these models miss, and each thing taught to the 4B after ft4 (ft5 to ft8) cost it some of
+the rest.
+
+Caveat: ft7 trained on about a quarter of its data (`prepare.py` stopped at a trace without tools, a loop the
+browser closed; now skipped and counted), so its result says less than it seems.
 
 ## Layout
 

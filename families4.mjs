@@ -19,8 +19,8 @@ const UNITS = {
   perPerson: { fr: ["par personne, pour tout le séjour", "par personne (forfait)", "/pers., une seule fois", "par participant, pour toute la durée", "chacun, quelle que soit la durée"], n: (q) => q.people },
   perDay: { fr: ["par jour", "la journée", "/jour", "chaque jour", "par jour, pour le groupe"], n: (q) => q.days },
   once: { fr: ["une fois, par réservation", "forfait unique", "par commande", "une seule fois", "par dossier"], n: () => 1 },
-  perItem: { fr: ["par unité", "l'unité", "pièce", "chacun(e)", "à l'unité"], n: (q) => q.items },
-  perItemDay: { fr: ["par unité et par jour", "par jour et par unité", "l'unité, la journée", "/unité/jour", "chacune, par jour"], n: (q) => q.items * q.days },
+  perItem: { fr: ["par unité", "l'unité", "pièce", "par article", "à l'unité"], n: (q) => q.items },
+  perItemDay: { fr: ["par unité et par jour", "par jour et par unité", "l'unité, la journée", "/unité/jour", "l'article, par jour"], n: (q) => q.items * q.days },
 };
 
 const TOPICS = [
@@ -55,7 +55,10 @@ function totals(r) {
     family: "totals",
     world: () => createBrowser({ tabs: [url], sites: { [url]: () => ({ title: `Tarifs — ${t.title}`, text }) } }),
     turns: [t.ask(q)],
-    steps: [call("price_total", { lines: counted.map((l) => ({ item: l.item, price: l.price, per: per(l), count: l.free ? 0 : l.n })) }),
+    steps: [call("price_total", {
+      quantities: { people: q.people, ...(t.days ? { days: q.days } : {}) },
+      lines: counted.map((l) => ({ item: l.item, price: l.price, per: per(l), ...(/Item/.test(l.unit) ? { count: q.items } : {}), ...(l.free ? { free: true } : {}) })),
+    }),
       say(`**${money(total)} €** en tout :\n\n${counted.map((l) => `- ${l.item} : ${l.free ? `offert (dès ${offer.from} jours)` : `${money(l.price)} € × ${l.n} = ${money(l.amount)} €`} (${l.word})`).join("\n")}`)],
     check: ({ answer }) => pass(numbersIn(answer).some((x) => Math.abs(x - total) < 0.001), `${total}`),
   };

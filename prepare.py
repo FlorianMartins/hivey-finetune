@@ -49,7 +49,8 @@ def main():
         n = skipped = 0
         with open(out / f'{name}.jsonl', 'w') as f:
             for row in part:
-                if leaked(row):
+                # A turn the browser closed without tools (a loop stopped): no tools to render it with.
+                if leaked(row) or not row.get('tools'):
                     skipped += 1
                     continue
                 try:

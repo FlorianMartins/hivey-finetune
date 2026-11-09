@@ -59,3 +59,6 @@
 !/units_look.py
 !/units_calls.py
 !/vary_units.py
+!/ft8.sh
+!/ft8b.sh
+!/ft8_gen.py
