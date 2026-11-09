@@ -12,4 +12,4 @@ venv/bin/python /opt/llm/llama.cpp/convert_hf_to_gguf.py "models/$NAME/merged" -
 LD_LIBRARY_PATH=llama-build/bin llama-build/bin/llama-quantize "models/$NAME/f16.gguf" "models/$NAME/Q4_K_M.gguf" Q4_K_M 2>&1 | tail -1 | cut -c1-120
 ls -la "models/$NAME/Q4_K_M.gguf" | cut -c25-120
 rm -f "models/$NAME/f16.gguf"
-bash measure.sh "$PWD/models/$NAME/Q4_K_M.gguf" "$NAME" heldout.mjs --lean
+bash measure.sh "$PWD/models/$NAME/Q4_K_M.gguf" "$NAME" ${MEASURE_TASKS:-heldout.mjs} --lean

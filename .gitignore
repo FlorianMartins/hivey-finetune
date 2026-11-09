@@ -49,3 +49,13 @@
 /release/*
 !/release/NOTES.md
 !/LICENSE
+!/heldout-units2.mjs
+!/families4.mjs
+!/unit-tasks.mjs
+!/ft7.sh
+!/units_base.sh
+!/units1.sh
+!/units_guard.sh
+!/units_look.py
+!/units_calls.py
+!/vary_units.py
